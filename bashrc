@@ -14,12 +14,15 @@ do
   source "$file"
 done
 
+# Big history!
+HISTFILESIZE=10000
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-# JCC: Quitamos el horroroso fondo verde en Other writables
+# Remove the ugly green background in "Other writables" files in ls
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
