@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Basic tools
-sudo apt install git tmux tree zip jq
+sudo apt install curl git tmux tree zip jq
 
 # Modern vim text editor
 sudo apt install neovim
@@ -12,6 +12,7 @@ if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
 fi
 
 # Dotfiles Manager: https://github.com/thoughtbot/rcm
+sudo apt install rcm
 
 # Basic tools replacements
 
@@ -29,9 +30,11 @@ sudo dpkg -i fd_7.4.0_amd64.deb
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-# Nice tools
-sudo apt install translate-shell
-sudo apt install asciidoctor
+# Cat replacement
+sudo apt install bat
+
+# Other nice tools
+sudo apt install tldr translate-shell asciidoctor
 
 
 # Install docker
