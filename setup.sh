@@ -30,6 +30,8 @@ sudo dpkg -i fd_7.4.0_amd64.deb
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+# Update forgit?
+
 # Cat replacement
 sudo apt install bat
 

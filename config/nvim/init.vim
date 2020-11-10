@@ -62,9 +62,9 @@ omap ç ]
 xmap Ç [
 xmap ç ]
 
-" " Move fast to prev/next buffer
-" nnoremap <C-K> :bprev<CR>
-" nnoremap <C-J> :bnext<CR>
+" " Move faster to prev/next buffer
+nnoremap <C-K> :bprev<CR>
+nnoremap <C-J> :bnext<CR>
 " 
 " " Insert blank line after/before current line
 " nnoremap <silent> ç :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
@@ -76,3 +76,5 @@ if executable("rg")
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
+" Treat dash as part of the word
+set iskeyword+=-
