@@ -14,15 +14,6 @@ do
   source "$file"
 done
 
-# don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
-# append to the history file, don't overwrite it
-shopt -s histappend
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-# Unlimited history
-HISTSIZE=
-HISTFILESIZE=
-
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -38,6 +29,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# tabtab source for packages
-# uninstall by removing these lines
-[ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+export PATH="${PATH}:/home/jcal/.cargo/bin/navi"
+
+. "$HOME/.cargo/env"
+
+# In WSL with disabled PATH integration, to be able to use utils such clip.exe
+export PATH="${PATH}:/mnt/c/WINDOWS/system32"
+# or vscode
+alias "vscode-win=/mnt/c/Users/JCAL/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
+
+# Better tab autocompletion handling (https://stackoverflow.com/a/48514114/134898) 
+bind 'TAB':menu-complete
+bind "set show-all-if-ambiguous on"
+bind "set menu-complete-display-prefix on"

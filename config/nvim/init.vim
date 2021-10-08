@@ -18,6 +18,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'fcpg/vim-waikiki'
+
 "
 " " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -66,9 +69,8 @@ xmap ç ]
 nnoremap <C-K> :bprev<CR>
 nnoremap <C-J> :bnext<CR>
 " 
-" " Insert blank line after/before current line
-" nnoremap <silent> ç :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
-" nnoremap <silent> Ç :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+" " Insert blank line after current line
+nnoremap <silent> <C-Space> :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
 
 " Use ripgrep as the grep program
 if executable("rg")
@@ -76,5 +78,11 @@ if executable("rg")
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-" Treat dash as part of the word
-set iskeyword+=-
+" Waikiki
+"
+let g:waikiki_roots = ['~/wiki/', '~/tasks']
+let maplocalleader = "ñ"
+let g:waikiki_default_maps = 1
+
+let g:markdown_folding = 1
+set nofoldenable

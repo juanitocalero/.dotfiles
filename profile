@@ -8,6 +8,15 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+# append to the history file, don't overwrite it
+shopt -s histappend
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# Unlimited history
+HISTSIZE=
+HISTFILESIZE=
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -30,3 +39,7 @@ fi
 EDITOR=vim
 VISUAL=$EDITOR
 export EDITOR VISUAL
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+. "$HOME/.cargo/env"
