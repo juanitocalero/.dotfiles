@@ -10,16 +10,15 @@ Plug 'tpope/vim-unimpaired'
 
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
-
-Plug 'vim-scripts/VOoM'
-
-Plug 'justinmk/vim-sneak'
+Plug 'junegunn/vim-easy-align'
 
 Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'fcpg/vim-waikiki'
+
+Plug 'mcchrish/nnn.vim'
 
 "
 " " List ends here. Plugins become visible to Vim after this call.

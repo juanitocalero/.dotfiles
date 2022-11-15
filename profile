@@ -16,6 +16,7 @@ shopt -s histappend
 # Unlimited history
 HISTSIZE=
 HISTFILESIZE=
+HISTFILE=~/.my_bash_history
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

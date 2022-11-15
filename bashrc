@@ -46,3 +46,8 @@ alias "vscode-win=/mnt/c/Users/JCAL/AppData/Local/Programs/Microsoft\ VS\ Code/b
 bind 'TAB':menu-complete
 bind "set show-all-if-ambiguous on"
 bind "set menu-complete-display-prefix on"
+
+# Alt-j to repeat last word (https://unix.stackexchange.com/a/356700/19560)
+# bind "\ej":"!#:$\e^"
+
+# source /home/jcal/.config/broot/launcher/bash/br
