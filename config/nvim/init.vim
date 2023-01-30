@@ -77,6 +77,12 @@ if executable("rg")
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
+" Include a RgAll variation for Rg in fzf.vim with --no-ignore
+command! -bang -nargs=* RgAll 
+	\ call fzf#vim#grep("rg --column --line-number --no-ignore --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+
+
+
 " Waikiki
 "
 let g:waikiki_roots = ['~/wiki/', '~/tasks']
