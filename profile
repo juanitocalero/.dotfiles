@@ -41,6 +41,3 @@ EDITOR=vim
 VISUAL=$EDITOR
 export EDITOR VISUAL
 
-# Added by serverless binary installer
-export PATH="$HOME/.serverless/bin:$PATH"
-. "$HOME/.cargo/env"

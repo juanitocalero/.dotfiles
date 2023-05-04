@@ -8,7 +8,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 
-Plug '~/.fzf'
+Plug '/usr/bin/fzf'
+Plug '/usr/share/doc/fzf/examples'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 
