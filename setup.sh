@@ -12,6 +12,9 @@ if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 		    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+# Make symbolic link from vim to nvim
+ln /usr/bin/nvim /usr/bin/vim
+
 
 # Dotfiles Manager: yadm
 
