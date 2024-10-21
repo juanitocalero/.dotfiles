@@ -153,7 +153,7 @@ lua <<EOF
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "clangd"},
+    ensure_installed = { "clangd", "ruff_lsp"},
 }
 
 require("lspconfig").clangd.setup({})

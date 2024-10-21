@@ -33,4 +33,9 @@ sudo $INSTR install pandoc
 # difftastic
 # taskell
 
+## Python
+sudo $INSTR install pip python3-devel
+pip install pipx
 
+# Terminal file manager
+sudo $INSTR install fuse-zip vifm
