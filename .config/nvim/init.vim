@@ -28,7 +28,9 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
- Plug 'sainnhe/sonokai'
+Plug 'sainnhe/sonokai'
+
+Plug 'preservim/nerdtree'
 
 " " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -153,11 +155,12 @@ lua <<EOF
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "clangd", "ruff_lsp"},
+    ensure_installed = { "clangd", "ruff_lsp", "jdtls"},
 }
 
 require("lspconfig").clangd.setup({})
 require("lspconfig").ruff_lsp.setup({})
+require("lspconfig").jdtls.setup({})
 
 -- Create the lsp keymaps only when a 
 -- language server is active
