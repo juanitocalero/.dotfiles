@@ -13,6 +13,7 @@ if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
 		    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 # Make symbolic link from vim to nvim
+# TODO: Better use "alternatives"
 ln /usr/bin/nvim /usr/bin/vim
 
 
@@ -20,9 +21,14 @@ ln /usr/bin/nvim /usr/bin/vim
 
 # Basic tools replacements
 
-sudo $INSTR install fd-find fzf ripgrep
+sudo $INSTR install fd-find ripgrep
 
-# Update forgit?
+# fzf from source (more recent)
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --no-update-rc --key-bindings --completion
+
+
+# TODO: forgit taken also from source
 
 
 # Other nice tools

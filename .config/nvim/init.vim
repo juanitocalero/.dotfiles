@@ -8,8 +8,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 
-Plug '/usr/bin/fzf'
-Plug '/usr/share/doc/fzf/examples'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 
@@ -36,6 +35,8 @@ Plug 'preservim/nerdtree'
 call plug#end()
 
 set backspace=indent,eol,start
+" Allow single character movements to move to the previous / next line
+set whichwrap+=<,>,h,l,[,]
 
 set tabstop=4
 set softtabstop=4
@@ -92,62 +93,14 @@ endif
 command! -bang -nargs=* RgAll 
 	\ call fzf#vim#grep("rg --column --line-number --no-ignore --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
+" Remap the file name insertion command to use fzf
+imap <c-x><c-f> <plug>(fzf-complete-path)
 
 let g:markdown_folding = 1
 set nofoldenable
 
-
-function! InsertImage(template)
-    " Get the filename from the selected text or the last word before the cursor
-    let filename = visualmode() ? @* : expand('<cword>')
-
-    " If no filename is provided, generate a unique name based on the current timestamp
-    if filename == ''
-        let filename = 'image_' . strftime('%Y%m%d%H%M%S')
-    endif
-
-    " Add the .png extension to the filename
-    let filename = filename . '.png'
-
-    " Get the current working directory
-    let cwd = getcwd()
-
-    " Create the full path to the file
-    let filepath = cwd . '/' . filename
-
-    " Call wl-paste with the filepath
-    silent execute '!wl-paste -t image > ' . shellescape(filepath)
-
-
-    " If a template string is provided, replace the placeholders with the filename and filepath
-    if a:template != ''
-        let output = substitute(a:template, '{filename}', filename, 'g')
-        let output = substitute(output, '{filepath}', filepath, 'g')
-    else
-        " Otherwise, use the filepath as the output
-        let output = filepath
-    endif
-
-    " If there is a visual selection, replace it with the filename
-    if visualmode()
-        normal! gvciw
-    else
-        " Otherwise, replace the last word before the cursor with the filename
-        normal! ciw
-    endif
-
-    " Insert the output at the current cursor position
-    execute "normal! i" . output
-
-endfunction
-
-" Map the key F5 to call the function with an empty template string
-nnoremap <F5> :call InsertImage('')<CR>
-vnoremap <F5> :call InsertImage('')<CR>
-
-" Map the key F6 to call the function with a Markdown template
-nnoremap <F6> :call InsertImage('[{filename}]({filename})')<CR>
-vnoremap <F6> :call InsertImage('[{filename}]({filename})')<CR>
+" Great custom script to insert images in markdown files
+runtime insert_image.vim
 
 colorscheme sonokai
 
@@ -155,12 +108,16 @@ lua <<EOF
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "clangd", "ruff_lsp", "jdtls"},
+    ensure_installed = { "clangd", "ruff", "jdtls"},
 }
 
-require("lspconfig").clangd.setup({})
-require("lspconfig").ruff_lsp.setup({})
-require("lspconfig").jdtls.setup({})
+-- require("lspconfig").clangd.setup({})
+-- require("lspconfig").ruff.setup({})
+-- require("lspconfig").jdtls.setup({})
+
+vim.lsp.config('clangd', {})
+vim.lsp.config('ruff', {})
+vim.lsp.config('jdtls', {})
 
 -- Create the lsp keymaps only when a 
 -- language server is active

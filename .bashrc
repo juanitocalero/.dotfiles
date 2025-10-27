@@ -41,3 +41,4 @@ bind "set menu-complete-display-prefix on"
 # previous shells. 
 export PROMPT_COMMAND="history -a"
 
+
