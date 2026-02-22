@@ -26,6 +26,7 @@ Plug 'github/copilot.vim'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'mfussenegger/nvim-jdtls'
 
 Plug 'sainnhe/sonokai'
 
@@ -107,17 +108,43 @@ colorscheme sonokai
 lua <<EOF
 
 require("mason").setup()
-require("mason-lspconfig").setup {
-    ensure_installed = { "clangd", "ruff", "jdtls"},
-}
+require("mason-lspconfig").setup({
+    ensure_installed = { "clangd", "pyright", "ruff", "jdtls" },
+    automatic_installation = true,
+})
 
--- require("lspconfig").clangd.setup({})
--- require("lspconfig").ruff.setup({})
--- require("lspconfig").jdtls.setup({})
+vim.lsp.config("clangd", {})
+vim.lsp.config("pyright", {})
+vim.lsp.config("ruff", {})
+vim.lsp.enable("clangd")
+vim.lsp.enable("pyright")
+vim.lsp.enable("ruff")
 
-vim.lsp.config('clangd', {})
-vim.lsp.config('ruff', {})
-vim.lsp.config('jdtls', {})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "java",
+    callback = function()
+        local jdtls = require("jdtls")
+        local root_dir = jdtls.setup.find_root({
+            ".git",
+            "mvnw",
+            "gradlew",
+            "pom.xml",
+            "build.gradle",
+        })
+        if not root_dir then
+            return
+        end
+
+        local workspace = vim.fn.stdpath("data")
+            .. "/jdtls-workspace/"
+            .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+
+        jdtls.start_or_attach({
+            cmd = { "jdtls", "-data", workspace },
+            root_dir = root_dir,
+        })
+    end,
+})
 
 -- Create the lsp keymaps only when a 
 -- language server is active
@@ -140,4 +167,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 EOF
-
